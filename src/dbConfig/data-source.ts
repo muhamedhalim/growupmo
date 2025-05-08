@@ -27,7 +27,7 @@ export const AppDataSource = new DataSource({
   entities: [User, Habit, SavingsGoal, Notification, MajorGoal, Installment, Income, Expense, EmergencyFund, CustomInstallmentPlan],
   migrations: [],
   subscribers: [],
-  
+  dropSchema: true,
 });
 
 // Initialize the connection
