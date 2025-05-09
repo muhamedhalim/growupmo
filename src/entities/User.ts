@@ -20,7 +20,7 @@ import {
     @Column()
     password!: string;
   
-    @OneToMany(() => Habit, (habit) => habit.user)
-    habits: Habit[] = [];
+    @OneToMany(() => Habit, habit => habit.user)
+habits!: Habit[];
   }
   
