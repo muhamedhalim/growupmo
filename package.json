@@ -2,7 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev src/index.ts"
+  },
   "dependencies": {
     "accepts": "^2.0.0",
     "body-parser": "^2.2.0",
@@ -55,7 +59,6 @@
     "qs": "^6.14.0",
     "range-parser": "^1.2.1",
     "raw-body": "^3.0.0",
-    "reflect-metadata": "^0.2.2",
     "router": "^2.2.0",
     "safe-buffer": "^5.2.1",
     "safer-buffer": "^2.1.2",
@@ -69,19 +72,19 @@
     "statuses": "^2.0.1",
     "toidentifier": "^1.0.1",
     "type-is": "^2.0.1",
-    "typeorm": "^0.3.22",
     "unpipe": "^1.0.0",
     "vary": "^1.1.2",
     "wrappy": "^1.0.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.1",
-    "@types/node": "^22.15.14",
+    "@types/node": "^22.15.17",
+    "reflect-metadata": "^0.2.2",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "typeorm": "^0.3.23",
     "typescript": "^5.8.3"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
