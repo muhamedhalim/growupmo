@@ -12,7 +12,6 @@ import { Expense } from "../entities/Expense";
 import { EmergencyFund } from "../entities/EmergencyFund";
 import { CustomInstallmentPlan } from "../entities/CustomInstallmentPlan";
 
-
 dotenv.config();
 
 export const AppDataSource = new DataSource({
@@ -22,12 +21,22 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  synchronize: false,
+  synchronize: true,
   logging: true,
-  entities: [User, Habit, SavingsGoal, Notification, MajorGoal, Installment, Income, Expense, EmergencyFund, CustomInstallmentPlan],
+  entities: [
+    User,
+    Habit,
+    SavingsGoal,
+    Notification,
+    MajorGoal,
+    Installment,
+    Income,
+    Expense,
+    EmergencyFund,
+    CustomInstallmentPlan,
+  ],
   migrations: [],
   subscribers: [],
-  dropSchema: true,
 });
 
 // Initialize the connection

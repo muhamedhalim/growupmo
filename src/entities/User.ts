@@ -1,16 +1,26 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-
-@Entity()
-export class User {
-  @PrimaryGeneratedColumn()  // Auto-incrementing ID
-  id!: number;
-
-  @Column()
-  name!: string;
-
-  @Column({ unique: true })
-  email!: string;
-
-  @Column()
-  password!: string;
-}
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    OneToMany,
+  } from 'typeorm';
+  import { Habit } from './Habit';
+  
+  @Entity()
+  export class User {
+    @PrimaryGeneratedColumn()
+    id!: number;
+  
+    @Column()
+    name!: string;
+  
+    @Column({ unique: true })
+    email!: string;
+  
+    @Column()
+    password!: string;
+  
+    @OneToMany(() => Habit, (habit) => habit.user)
+    habits: Habit[] = [];
+  }
+  
