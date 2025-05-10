@@ -4,6 +4,10 @@ import { GoalRepository } from '../repositories/goal.repository';
 import { UserRepository } from '../repositories/user.repository';
 
 export class GoalService {
+    getGoalUsers: any;
+    getUpcomingGoals() {
+      throw new Error('Method not implemented.');
+    }
     private goalRepository = new GoalRepository();
     private userRepository = new UserRepository();
 
