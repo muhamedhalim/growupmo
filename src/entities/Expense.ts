@@ -1,19 +1,24 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { User } from "./User";
+// src/entities/Expense.ts
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { User } from './User';
+
 @Entity()
 export class Expense {
-  @PrimaryGeneratedColumn()
-  id!: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string | undefined;
 
-  @ManyToOne(() => User, user => user.id)
+    @Column()
+    amount: number | undefined;
+
+    @Column()
+    category: string | undefined;
+
+    @Column()
+    description: string | undefined;
+
+    @Column({ type: 'date' })
+    date: Date | undefined;
+
+    @ManyToOne(() => User, user => user.expenses)
   user!: User;
-
-  @Column()
-  amount!: number;
-
-  @Column()
-  category!: string;
-
-  @Column()
-  date!: Date;
 }

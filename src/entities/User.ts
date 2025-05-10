@@ -1,26 +1,39 @@
-import {
-    Entity,
-    PrimaryGeneratedColumn,
-    Column,
-    OneToMany,
-  } from 'typeorm';
-  import { Habit } from './Habit';
-  
-  @Entity()
-  export class User {
-    @PrimaryGeneratedColumn()
-    id!: number;
-  
+// src/entities/User.ts
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Expense } from './Expense';
+import { Habit } from './Habit';
+import { Goal } from './Goal';
+import { EmergencyFund } from './EmergencyFund';
+
+@Entity()
+export class User {
+    @PrimaryGeneratedColumn('uuid')
+  id!: string;
+
     @Column()
-    name!: string;
-  
+  name!: string;
+
     @Column({ unique: true })
-    email!: string;
-  
+  email!: string;
+
     @Column()
-    password!: string;
-  
+  password!: string;
+
+    @Column({ nullable: true })
+  notificationToken!: string;
+
+    @Column({ type: 'float', default: 0 })
+  monthlyIncome!: number;
+
+    @OneToMany(() => Expense, expense => expense.user)
+  expenses!: Expense[];
+
     @OneToMany(() => Habit, habit => habit.user)
-habits!: Habit[];
-  }
-  
+  habits!: Habit[];
+
+    @OneToMany(() => Goal, goal => goal.user)
+  goals!: Goal[];
+
+    @OneToMany(() => EmergencyFund, emergency => emergency.user)
+  emergencyFunds!: EmergencyFund[];
+}

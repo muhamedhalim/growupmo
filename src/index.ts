@@ -1,7 +1,7 @@
 import express from 'express';
 import { AppDataSource } from './dbConfig/data-source';
-import usersRoutes from './routes/users.route';
-import habitsRoutes from './routes/habits.route';
+import usersRoutes from './Routes/users.route';
+import habitsRoutes from './Routes/habits.route';
 
 const app = express();
 const port = 3000;

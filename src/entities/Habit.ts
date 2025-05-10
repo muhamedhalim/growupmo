@@ -1,22 +1,24 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { User } from "./User";
+// src/entities/Habit.ts
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { User } from './User';
+
 @Entity()
 export class Habit {
-  @PrimaryGeneratedColumn()
-  id!: number;
+    @PrimaryGeneratedColumn('uuid')
+  id!: string;
 
-  @ManyToOne(() => User, user => user.id)
+    @Column()
+  name!: string;
+
+    @Column()
+  frequency!: string; // daily, weekly, monthly
+
+    @Column({ default: false })
+  completed!: boolean;
+
+    @Column({ type: 'time', nullable: true })
+  reminderTime!: string;
+
+    @ManyToOne(() => User, user => user.habits)
   user!: User;
-
-  @Column()
-  habit!: string;
-
-  @Column()
-  frequency!: number;
-
-  @Column()
-  time!: string;
-
-  @Column()
-  status!: string;
 }

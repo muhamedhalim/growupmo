@@ -1,16 +1,20 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { User } from "./User";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne  } from 'typeorm';
+import { User } from './User';
+
 @Entity()
 export class EmergencyFund {
-  @PrimaryGeneratedColumn()
-  id!: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string | undefined;
 
-  @ManyToOne(() => User, user => user.id)
-  user!: User;
+    @Column({ type: 'float' })
+    amount: number | undefined;
 
-  @Column()
-  monthlyAmount!: number;
+    @Column({ type: 'date' })
+    date: Date | undefined;
 
-  @Column()
-  currentBalance!: number;
+    @Column()
+    description: string | undefined;
+
+    @ManyToOne(() => User, user => user.emergencyFunds)
+    user: User | undefined;
 }
