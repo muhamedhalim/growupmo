@@ -30,6 +30,7 @@ router.post('/expenses', asyncHandler(expenseController.addExpense));
 router.get('/expenses', asyncHandler(expenseController.getExpenses));
 router.get('/expenses/report/:month/:year', asyncHandler(expenseController.getMonthlyReport));
 
+
 // Habit routes
 router.post('/habits', asyncHandler(habitController.addHabit));
 router.get('/habits', asyncHandler(habitController.getHabits));
