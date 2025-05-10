@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { NotificationService } from '../Services/notification.service';
+import { User } from '../entities/User';
 
 export class NotificationController {
     private notificationService = new NotificationService();
@@ -21,7 +22,7 @@ export class NotificationController {
     async testNotification(req: Request, res: Response) {
         try {
             await this.notificationService.sendNotification(
-                req.user,
+                req.user as User,
                 "اختبار إشعار",
                 "هذا إشعار تجريبي من التطبيق"
             );

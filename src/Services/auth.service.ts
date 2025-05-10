@@ -8,15 +8,20 @@ export class AuthService {
     private userRepository = new UserRepository();
 
     async register(userData: Partial<User>) {
+        // Add validation for required fields
+        if (!userData.email || !userData.password) {
+            throw new Error('Email and password are required');
+        }
+    
         const existingUser = await this.userRepository.findByEmail(userData.email);
         if (existingUser) throw new Error('Email already in use');
-
+    
         const hashedPassword = await bcrypt.hash(userData.password, 10);
         const user = await this.userRepository.create({
             ...userData,
             password: hashedPassword
         });
-
+    
         return user;
     }
 

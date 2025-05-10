@@ -5,19 +5,19 @@ import { User } from './User';
 @Entity()
 export class Expense {
     @PrimaryGeneratedColumn('uuid')
-    id: string | undefined;
+    id!: string | undefined;
 
     @Column()
-    amount: number | undefined;
+    amount!: number | undefined;
 
     @Column()
-    category: string | undefined;
+    category!: string | undefined;
 
     @Column()
-    description: string | undefined;
+    description!: string | undefined;
 
     @Column({ type: 'date' })
-    date: Date | undefined;
+    date!: Date | undefined;
 
     @ManyToOne(() => User, user => user.expenses)
   user!: User;

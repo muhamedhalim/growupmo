@@ -1,7 +1,7 @@
 import express from 'express';
 import { AppDataSource } from './dbConfig/data-source';
-import usersRoutes from './Routes/users.route';
-import habitsRoutes from './Routes/habits.route';
+// import usersRoutes from './Routes/users.route';
+// import habitsRoutes from './Routes/habits.route';
 
 const app = express();
 const port = 3000;
@@ -13,8 +13,8 @@ AppDataSource.initialize()
     app.get('/', (req, res) => {
       res.send('TypeORM with Express!');
     });
-    app.use('/api/users', usersRoutes);
-    app.use('/api/habits', habitsRoutes);
+    // app.use('/api/users', usersRoutes);
+    // app.use('/api/habits', habitsRoutes);
 
     app.listen(port, () => {
       console.log(`🚀 Server is running at http://localhost:${port}`);

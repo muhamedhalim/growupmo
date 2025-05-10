@@ -38,8 +38,8 @@ export class EmergencyService {
         return user.monthlyIncome * 0.7;
     }
 
-    async getTotalEmergencyFund(userId: string) {
+    async getTotalEmergencyFund(userId: string): Promise<number> {
         const funds = await this.getUserFunds(userId);
-        return funds.reduce((total, fund) => total + fund.amount, 0);
+        return funds.reduce((total, fund) => total + (fund.amount || 0), 0);
     }
 }

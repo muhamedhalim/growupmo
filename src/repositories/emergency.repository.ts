@@ -22,7 +22,7 @@ export class EmergencyRepository {
 
     async findByUserId(userId: string): Promise<EmergencyFund[]> {
         return this.repository.find({ 
-            where: { user: { id: Number(userId) } },
+            where: { user: { id: userId } },
             relations: ['user'],
             order: { date: 'DESC' }
         });

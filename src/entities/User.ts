@@ -27,7 +27,7 @@ export class User {
 
     @OneToMany(() => Expense, expense => expense.user)
   expenses!: Expense[];
-
+  
     @OneToMany(() => Habit, habit => habit.user)
   habits!: Habit[];
 

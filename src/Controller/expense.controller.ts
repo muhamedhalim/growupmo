@@ -7,7 +7,10 @@ export class ExpenseController {
 
     async addExpense(req: Request, res: Response) {
         try {
-            const expense = await this.expenseService.createExpense(req.user.id, req.body);
+            if (!req.user) {
+                return res.status(401).json({ message: 'Unauthorized' });
+              }
+            const expense = await this.expenseService.createExpense(req.user?.id, req.body);
             res.status(201).json(expense);
         } catch (error) {
             if (error instanceof Error) {
@@ -20,7 +23,10 @@ export class ExpenseController {
 
     async getExpenses(req: Request, res: Response) {
         try {
-            const expenses = await this.expenseService.getUserExpenses(req.user.id);
+            if (!req.user) {
+                return res.status(401).json({ message: 'Unauthorized' });
+              }
+            const expenses = await this.expenseService.getUserExpenses(req.user?.id);
             res.json(expenses);
         } catch (error) {
             if (error instanceof Error) {
@@ -33,14 +39,21 @@ export class ExpenseController {
 
     async getMonthlyReport(req: Request, res: Response) {
         try {
+            if (!req.user) {
+                return res.status(401).json({ message: 'Unauthorized' });
+              }
             const report = await this.expenseService.generateMonthlyReport(
-                req.user.id,
+                req.user?.id,
                 parseInt(req.params.month),
                 parseInt(req.params.year)
             );
             res.json(report);
         } catch (error) {
-            res.status(500).json({ message: error.message });
+            if (error instanceof Error) {
+                res.status(400).json({ message: error.message });
+            } else {
+                res.status(400).json({ message: 'An unknown error occurred' });
+            }
         }
     }
 }

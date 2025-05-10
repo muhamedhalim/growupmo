@@ -7,9 +7,16 @@ export class EmergencyController {
 
     async addToEmergencyFund(req: Request, res: Response) {
         try {
+            const amount = Number(req.body.amount);
+if (isNaN(amount)) {
+  return res.status(400).json({ message: 'Amount must be a valid number' });
+}
+            if (!req.user) {
+                return res.status(401).json({ message: 'Unauthorized' });
+              }
             const emergencyFund = await this.emergencyService.addToFund(
-                req.user.id,
-                req.body.amount,
+                req.user?.id,
+                amount,
                 req.body.description
             );
             res.status(201).json(emergencyFund);
@@ -24,7 +31,12 @@ export class EmergencyController {
 
     async getEmergencyFunds(req: Request, res: Response) {
         try {
-            const funds = await this.emergencyService.getUserFunds(req.user.id);
+            if (!req.user) {
+                return res.status(401).json({ message: 'Unauthorized' });
+              }
+              
+            const funds = await this.emergencyService.getUserFunds(req.user?.id);
+            
             res.json(funds);
         } catch (error) {
             if (error instanceof Error) {
@@ -41,8 +53,11 @@ export class EmergencyController {
 
     async calculateEmergencyFund(req: Request, res: Response) {
         try {
+            if (!req.user) {
+                return res.status(401).json({ message: 'Unauthorized' });
+              }
             const suggestedAmount = await this.emergencyService.calculateSuggestedAmount(
-                req.user.id
+                req.user?.id
             );
             res.json({ suggestedAmount });
         }catch (error) {
