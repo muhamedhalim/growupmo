@@ -1,19 +1,44 @@
-export interface DailyTask {
-  name: any;
-  id: string;               
-  userId: string;          
-  title: string;           
-  description?: string;     
-  habitType: string;       
-  isRecurring: boolean;   
-  frequency: {            
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+
+@Entity()
+export class DailyTask {
+  @PrimaryGeneratedColumn('uuid')
+  id!: string;
+
+  @Column()
+  name!: string;
+
+  @Column()
+  userId!: string;
+
+  @Column()
+  title!: string;
+
+  @Column()
+  habitType!: string;
+
+  @Column()
+  isRecurring!: boolean;
+
+  @Column('json')
+  frequency!: {
     interval: 'daily' | 'weekly' | 'monthly';
-    daysOfWeek?: number[];  
-    dayOfMonth?: number;   
+    daysOfWeek?: number[];
+    dayOfMonth?: number;
   };
-  reminderTime: Date;      
-  isCompleted: boolean;    
-  streak: number;          
-  createdAt: Date;        
-  updatedAt: Date;        
+
+  @Column()
+  reminderTime!: Date;
+
+  @Column()
+  isCompleted!: boolean;
+
+  @Column()
+  streak!: number;
+
+  @CreateDateColumn()
+  createdAt!: Date;
+
+  @UpdateDateColumn()
+  updatedAt!: Date;
 }

@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import { AuthController } from '../Controller/auth.controller'; // lowercase 'controllers'
+import { AuthController } from '../Controller/auth.controller'; 
 import { ExpenseController } from '../Controller/expense.controller';
 import { HabitController } from '../Controller/habit.controller';
 import { GoalController } from '../Controller/goal.controller';
