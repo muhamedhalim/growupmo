@@ -25,10 +25,16 @@ export class ExpenseService {
 
     async generateMonthlyReport(userId: string, month: number, year: number) {
         const expenses = await this.expenseRepository.findByUserAndMonth(userId, month, year);
-        
-        const total = expenses.reduce((sum, exp) => sum + exp.amount, 0);
+
+        const total = expenses.reduce((sum, exp) => {
+            const amount = exp.amount ?? 0;
+            return sum + amount;
+        }, 0);
+
         const byCategory = expenses.reduce((acc: Record<string, number>, exp) => {
-            acc[exp.category] = (acc[exp.category] || 0) + exp.amount;
+            const category = exp.category ?? 'Uncategorized';
+            const amount = exp.amount ?? 0;
+            acc[category] = (acc[category] || 0) + amount;
             return acc;
         }, {});
 

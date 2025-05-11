@@ -3,6 +3,15 @@ import { AppDataSource } from '../../src/dbConfig/data-source';
 import { Habit } from '../entities/Habit';
 
 export class HabitRepository {
+    findOne(arg0: { where: { id: string; user: { id: string; }; }; }) {
+        throw new Error('Method not implemented.');
+    }
+    find(arg0: { where: { user: { id: string; }; }; order: { createdAt: string; }; }) {
+        throw new Error('Method not implemented.');
+    }
+    save(habit: Promise<Habit>) {
+        throw new Error('Method not implemented.');
+    }
     private repository: Repository<Habit>;
 
     constructor() {

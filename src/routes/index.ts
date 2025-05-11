@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { AuthController } from '../Controller/auth.controller'; 
 import { ExpenseController } from '../Controller/expense.controller';
-import { HabitController } from '../Controller/habit.controller';
+// import { HabitController } from '../Controller/habit.controller';
 import { GoalController } from '../Controller/goal.controller';
 import { EmergencyController } from '../Controller/emergency.controller';
 import { authenticate } from '../Middlewares/auth.middleware';
@@ -29,7 +29,6 @@ router.use(asyncHandler(authenticate));
 router.post('/expenses', asyncHandler(expenseController.addExpense));
 router.get('/expenses', asyncHandler(expenseController.getExpenses));
 router.get('/expenses/report/:month/:year', asyncHandler(expenseController.getMonthlyReport));
-
 
 // Habit routes
 router.post('/habits', asyncHandler(habitController.addHabit));

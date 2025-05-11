@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { DataSource } from 'typeorm';
+
 import { User } from './entities/User';
 import { Habit } from './entities/Habit';
 import { Expense } from './entities/Expense';
@@ -13,14 +14,22 @@ import { Notification } from './entities/Notification';
 import { DailyTask } from './entities/DailyTask';
 import { createDailyTaskScheduler } from './utils/scheduler';
 
+import authRoutes from './routes/index';
+import habitRoutes from './routes/index';
+import expenseRoutes from './routes/index';
+import goalRoutes from './routes/index';
+import emergencyRoutes from './routes/index';
+import notificationRoutes from './routes/index';
+import dailyTaskRoutes from './routes/index';
+
 dotenv.config();
 
 export const AppDataSource = new DataSource({
   type: 'mysql',
   host: process.env.DB_HOST || 'localhost',
-  port: parseInt(process.env.DB_PORT || '5432', 10),
-  username: process.env.DB_USERNAME || 'postgres',
-  password: process.env.DB_PASSWORD || 'postgres',
+  port: parseInt(process.env.DB_PORT || '3306', 10),
+  username: process.env.DB_USERNAME || 'root',
+  password: process.env.DB_PASSWORD || '',
   database: process.env.DB_NAME || 'life_organizer',
   entities: [User, Habit, Expense, Goal, EmergencyFund, Notification, DailyTask],
   synchronize: true,
@@ -85,13 +94,13 @@ class App {
       res.status(200).json({ status: 'healthy' });
     });
 
-    this.app.use('/api/auth', require('./routes/auth.routes'));
-    this.app.use('/api/habits', require('./routes/habit.routes'));
-    this.app.use('/api/expenses', require('./routes/expense.routes'));
-    this.app.use('/api/goals', require('./routes/goal.routes'));
-    this.app.use('/api/emergency-fund', require('./routes/emergency.routes'));
-    this.app.use('/api/notifications', require('./routes/notification.routes'));
-    this.app.use('/api/daily-tasks', require('./routes/dailyTask.routes'));
+    this.app.use('/api/auth', authRoutes);
+    this.app.use('/api/habits', habitRoutes);
+    this.app.use('/api/expenses', expenseRoutes);
+    this.app.use('/api/goals', goalRoutes);
+    this.app.use('/api/emergency-fund', emergencyRoutes);
+    this.app.use('/api/notifications', notificationRoutes);
+    this.app.use('/api/daily-tasks', dailyTaskRoutes);
   }
 
   private initializeErrorHandling(): void {

@@ -17,14 +17,23 @@ export class HabitService {
             user
         });
 
-        return await this.habitRepository.save(habit);
+        try {
+            return await this.habitRepository.save(habit);
+        } catch (error) {
+            throw new Error('حدث خطأ أثناء حفظ العادة');
+        }
     }
 
+    // استرجاع جميع العادات للمستخدم
     async getUserHabits(userId: string) {
-        return await this.habitRepository.find({ 
-            where: { user: { id: userId } },
-            order: { createdAt: 'DESC' }
-        });
+        try {
+            return await this.habitRepository.find({
+                where: { user: { id: userId } },
+                order: { createdAt: 'DESC' }
+            });
+        } catch (error) {
+            throw new Error('حدث خطأ أثناء استرجاع العادات');
+        }
     }
 
     async markHabitComplete(habitId: string, userId: string) {
@@ -39,13 +48,21 @@ export class HabitService {
         habit.completed = true;
         habit.lastCompletedAt = new Date();
 
-        return await this.habitRepository.save(habit);
+        try {
+            return await this.habitRepository.save(habit);
+        } catch (error) {
+            throw new Error('حدث خطأ أثناء تحديث العادة');
+        }
     }
 
     async resetDailyHabits(userId: string) {
-        await this.habitRepository.update(
-            { user: { id: userId }, frequency: 'daily' },
-            { completed: false }
-        );
+        try {
+            await this.habitRepository.update(
+                { user: { id: userId }, frequency: 'daily' },
+                { completed: false }
+            );
+        } catch (error) {
+            throw new Error('حدث خطأ أثناء إعادة تعيين العادات اليومية');
+        }
     }
 }
